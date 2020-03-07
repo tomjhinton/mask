@@ -1,0 +1,38 @@
+{
+  "name": "mask",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "webpack-dev-server --mode=development",
+    "build": "webpack -p",
+    "deploy": "yarn build && gh-pages -d dist"
+  },
+  "repository": "git@github.com:tomjhinton/mask.git",
+  "author": "Tom Hinton <tomjhinton@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/polyfill": "^7.8.3",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "@tensorflow-models/facemesh": "^0.0.1",
+    "@tensorflow/tfjs-converter": "^1.5.1",
+    "@tensorflow/tfjs-core": "^1.5.1",
+    "babel-loader": "^8.0.6",
+    "cannon": "^0.6.2",
+    "copy-webpack-plugin": "^5.0.4",
+    "css-loader": "^3.2.0",
+    "file-loader": "^5.0.2",
+    "gh-pages": "^2.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "three": "^0.112.1",
+    "tone": "^13.8.25",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
+  }
+}
