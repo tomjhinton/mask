@@ -36,10 +36,12 @@ function setupWebcam() {
 }
 
 setupWebcam()
-
+let model
 async function main() {
   // Load the MediaPipe facemesh model.
-  const model = await facemesh.load();
+  if(!model){
+   model = await facemesh.load();
+}
 
   // Pass in a video stream (or an image, canvas, or 3D tensor) to obtain an
   // array of detected faces from the MediaPipe graph.
@@ -85,12 +87,12 @@ async function main() {
       for (let i = 0; i < keypoints.length; i++) {
         const [x, y, z] = keypoints[i];
 
-        console.log(`Keypoint ${i}: [${x}, ${y}, ${z}]`);
+        // console.log(`Keypoint ${i}: [${x}, ${y}, ${z}]`);
         if(balls.length<= i){
         ballCreate(x,y,z)
       }
       if(balls.length>i){
-        console.log(balls[i])
+        // console.log(balls[i])
       balls[i].position.x = x
         balls[i].position.y = y
           balls[i].position.z = z
@@ -158,7 +160,7 @@ function ballCreate(x,y,z){
   const materialBall = new THREE.MeshPhongMaterial( { color: `rgba(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},1)`, specular: `rgba(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},1)` , shininess: 100, side: THREE.DoubleSide, opacity: 0.8,
     transparent: true } )
 
-  const ballGeometry = new THREE.SphereGeometry(1, 32, 32)
+  const ballGeometry = new THREE.SphereGeometry(2, 32, 32)
   const ballMesh = new THREE.Mesh( ballGeometry, materialBall )
   ballMesh.name = 'ball'
   scene.add(ballMesh)
@@ -167,7 +169,7 @@ function ballCreate(x,y,z){
 
 
 
-  ballShape = new CANNON.Sphere(1)
+  ballShape = new CANNON.Sphere(2)
   ballBody = new CANNON.Body({ mass: 0, material: ballMaterial })
   ballBody.addShape(ballShape)
   ballBody.linearDamping = 0
@@ -189,6 +191,10 @@ function ballCreate(x,y,z){
 }
 
 var controls = new OrbitControls( camera, renderer.domElement );
+
+
+
+
 
 var update = function() {
 if(balls){
