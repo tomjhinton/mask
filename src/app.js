@@ -10,7 +10,8 @@ const CANNON = require('cannon')
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 
-
+import './debug.js'
+let points = []
 const webcamElement = document.getElementById('webcam')
 const canvas = document.getElementById('canvas')
 const instructions = document.getElementById('instructions')
@@ -90,6 +91,8 @@ async function main() {
         // console.log(`Keypoint ${i}: [${x}, ${y}, ${z}]`);
         if(balls.length<= i){
         ballCreate(x,y,z)
+        points.push(new THREE.Vector3( x,  y, z ))
+
       }
       if(balls.length>i){
         // console.log(balls[i])
@@ -99,6 +102,7 @@ async function main() {
     }
 
       }
+
     }
     main()
   }
@@ -181,7 +185,7 @@ function ballCreate(x,y,z){
 
 
     if(playing){
-
+      console.log('bump')
       // sampler.triggerAttackRelease(drums[Math.floor(Math.random()*5)], 1)
       // eval(synthArr[Math.floor(Math.random()*4)])
 
@@ -195,6 +199,7 @@ var controls = new OrbitControls( camera, renderer.domElement );
 
 
 
+const cannonDebugRenderer = new THREE.CannonDebugRenderer( scene, world )
 
 var update = function() {
 if(balls){
@@ -205,9 +210,9 @@ if(balls){
 
 
   updatePhysics()
-  // if(cannonDebugRenderer){
-  //   //cannonDebugRenderer.update()
-  // }
+  if(cannonDebugRenderer){
+    // cannonDebugRenderer.update()
+  }
 }
 //const cannonDebugRenderer = new THREE.CannonDebugRenderer( scene, world )
 function animate() {
@@ -225,6 +230,7 @@ function updatePhysics() {
     // console.log('hiya')
     ballMeshes[j].position.copy(balls[j].position)
     ballMeshes[j].quaternion.copy(balls[j].quaternion)
+    
   }
 }
 
